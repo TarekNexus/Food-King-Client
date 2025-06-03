@@ -4,7 +4,6 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { updateProfile } from "firebase/auth";
 
-
 const Register = () => {
   const { createUser, setUser, signInWithGoogle } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
@@ -18,12 +17,11 @@ const Register = () => {
     const password = form.password.value;
     const photo = form.photo.value;
     const name = form.name.value;
-   
-      if (!name || !photo || !email || !password) {
+
+    if (!name || !photo || !email || !password) {
       toast.error("Please fill in all fields.");
       return;
     }
-    // Password validation
     const hasUppercase = /[A-Z]/.test(password);
     const hasLowercase = /[a-z]/.test(password);
     const isLongEnough = password.length >= 6;
@@ -38,7 +36,6 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-
         updateProfile(user, {
           displayName: name,
           photoURL: photo,
@@ -67,155 +64,113 @@ const Register = () => {
         toast.error(error.message);
       });
   };
+
   useEffect(() => {
     document.title = "Register | FOOD KING";
   }, []);
+
   return (
-    <div className="flex justify-center min-h-screen items-center">
-     <div className="p-4 w-full flex justify-center ">
-       <div className="border border-green-600 card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5">
-        <h2 className="font-semibold text-2xl text-center">
-          Register your account
-        </h2>
-        <form onSubmit={handleRegister} className="card-body">
-          <fieldset className="fieldset">
-            <label className="label">Name</label>
-            <input
-             
-              name="name"
-              type="text"
-              className="input"
-              placeholder="Enter your name"
-            />
-
-            <label className="label">Photo URL</label>
-            <input
-             
-              name="photo"
-              type="text"
-              className="input"
-              placeholder="Enter your Photo URL"
-            />
-
-            <label className="label">Email</label>
-            <input
-              
-              name="email"
-              type="email"
-              autoComplete="username"
-              className="input"
-              placeholder="Email"
-            />
-
-            <label className="label">Password</label>
-            <div className="relative">
+    <div className="min-h-screen flex items-center justify-center   p-4">
+      <div class="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+        <div className="px-8 py-6">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold text-gray-800">
+              Register your account
+            </h2>
+            <p className="text-sm text-gray-500">
+              It’s free and only takes a minute
+            </p>
+          </div>
+          <form onSubmit={handleRegister}>
+            <div className="space-y-4">
               <input
-               
-                name="password"
-                type={showPassword ? "text" : "password"}
-                autoComplete="new-password"
-                className="input w-full pr-12"
-                placeholder="Password"
+                name="name"
+                type="text"
+                placeholder="Enter your name"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
-              <span
-                className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
-                onClick={() => setShowPassword(!showPassword)}
+              <input
+                name="photo"
+                type="text"
+                placeholder="Enter your Photo URL"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <input
+                name="email"
+                type="email"
+                placeholder="Email"
+                autoComplete="username"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <div className="relative">
+                <input
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  autoComplete="new-password"
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 pr-10"
+                />
+                <span
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+                >
+                  {showPassword ? "👁️" : "🙈"}
+                </span>
+              </div>
+              <button
+                type="submit"
+                className="w-full py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition duration-200"
               >
-                {showPassword ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5 text-gray-500"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
+                Register
+              </button>
+              <button
+                type="button"
+                onClick={handleLoginWithGoogle}
+                className="btn bg-white w-full rounded-full text-black border-[#e5e5e5] mt-4"
+              >
+                <svg
+                  aria-label="Google logo"
+                  width="16"
+                  height="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                >
+                  <g>
+                    <path d="m0 0H512V512H0" fill="#fff"></path>
                     <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
+                      fill="#34a853"
+                      d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
+                    ></path>
                     <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5 text-gray-500"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
+                      fill="#4285f4"
+                      d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
+                    ></path>
                     <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13.875 18.825A10.05 10.05 0 0112 19c-5.523 0-10-4.477-10-10 0-1.38.28-2.695.788-3.875M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
+                      fill="#fbbc02"
+                      d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
+                    ></path>
                     <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 3l18 18"
-                    />
-                  </svg>
-                )}
-              </span>
+                      fill="#ea4335"
+                      d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
+                    ></path>
+                  </g>
+                </svg>
+                Login with Google
+              </button>
             </div>
-
-            <button type="submit" className="btn btn-neutral bg-green-600 border-none mt-4">
-              Register
-            </button>
-
-            <button
-              type="button"
-              onClick={handleLoginWithGoogle}
-              className="btn bg-white text-black border-[#e5e5e5] mt-4"
-            >
-              <svg
-                aria-label="Google logo"
-                width="16"
-                height="16"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
-              >
-                <g>
-                  <path d="m0 0H512V512H0" fill="#fff"></path>
-                  <path
-                    fill="#34a853"
-                    d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
-                  ></path>
-                  <path
-                    fill="#4285f4"
-                    d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
-                  ></path>
-                  <path
-                    fill="#fbbc02"
-                    d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
-                  ></path>
-                  <path
-                    fill="#ea4335"
-                    d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
-                  ></path>
-                </g>
-              </svg>
-              Login with Google
-            </button>
-
-            <p className="font-semibold pt-5 text-center">
+            <p className="text-sm text-center text-gray-600 mt-5">
               Already Have An Account?{" "}
-              <Link className="text-green-600" to="/auth/login">
+              <Link
+                to="/auth/login"
+                className="text-red-600 font-bold hover:underline"
+              >
                 Login
               </Link>
             </p>
-          </fieldset>
-        </form>
+          </form>
+        </div>
       </div>
-     </div>
     </div>
   );
 };
