@@ -5,7 +5,6 @@ import {
   FaInstagram,
   FaEnvelope,
   FaPhone,
-  
 } from "react-icons/fa";
 import logo from "../assets/logo.svg";
 import { NavLink } from "react-router";
@@ -19,7 +18,6 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start">
             <div className="flex items-center mb-4">
               <img className="w-40" src={logo} alt="" />
-              
             </div>
             <p className="text-black text-opacity-90 text-center md:text-left mb-4">
               Savor the taste of tradition with our thoughtfully prepared dishes
@@ -53,57 +51,55 @@ const Footer = () => {
             </h3>
             <ul className="space-y-2 text-center md:text-left">
               <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? "text-red-500 font-bold" : ""
-          }
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/AvailableFoods"
-          className={({ isActive }) =>
-            isActive ? "text-red-500 font-bold" : ""
-          }
-        >
-          Available Foods
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/AddFood"
-          className={({ isActive }) =>
-            isActive ? "text-red-500 font-bold" : ""
-          }
-        >
-          Add Food
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/ManageMyFoods"
-          className={({ isActive }) =>
-            isActive ? "text-red-500 font-bold" : ""
-          }
-        >
-          Manage My Foods
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/MyFoodRequest"
-          className={({ isActive }) =>
-            isActive ? "text-red-500 font-bold" : ""
-          }
-        >
-      My Food Request
-        </NavLink>
-      </li>
-
-     
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? "text-red-500 font-bold" : ""
+                  }
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/AvailableFoods"
+                  className={({ isActive }) =>
+                    isActive ? "text-red-500 font-bold" : ""
+                  }
+                >
+                  Available Foods
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/AddFood"
+                  className={({ isActive }) =>
+                    isActive ? "text-red-500 font-bold" : ""
+                  }
+                >
+                  Add Food
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/ManageMyFoods"
+                  className={({ isActive }) =>
+                    isActive ? "text-red-500 font-bold" : ""
+                  }
+                >
+                  Manage My Foods
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/MyFoodRequest"
+                  className={({ isActive }) =>
+                    isActive ? "text-red-500 font-bold" : ""
+                  }
+                >
+                  My Food Request
+                </NavLink>
+              </li>
             </ul>
           </div>
 
@@ -146,7 +142,8 @@ const Footer = () => {
               Cooking Tips
             </h3>
             <p className="text-black text-opacity-90 text-center md:text-left mb-4">
-              Join our foodie family get delicious updates and members-only deals!
+              Join our foodie family get delicious updates and members-only
+              deals!
             </p>
             <div className="flex w-full">
               <input
