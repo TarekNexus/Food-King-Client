@@ -71,12 +71,12 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center   p-4">
-      <div class="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
+      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
         <div className="px-8 py-6">
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800">
-              Register your account
+              Register your Account
             </h2>
             <p className="text-sm text-gray-500">
               It’s free and only takes a minute

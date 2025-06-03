@@ -78,6 +78,7 @@ const Login = () => {
               name="email"
               required
               value={email}
+              autoComplete="username"
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email Address"
               className="w-full px-4 py-2 text-sm border rounded-md"
@@ -85,6 +86,7 @@ const Login = () => {
             <input
               name="password"
               required
+              autoComplete="current-password"
               type="password"
               placeholder="Password"
               className="w-full px-4 py-2 text-sm border rounded-md"
