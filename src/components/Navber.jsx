@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-
+import logo from"../assets/logo.svg"
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Provider/AuthContext";
 import { toast } from "react-toastify";
@@ -14,7 +14,7 @@ const Navber = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            isActive ? "text-blue-500 font-bold" : ""
+            isActive ? "text-red-500 font-bold" : ""
           }
         >
           Home
@@ -24,7 +24,7 @@ const Navber = () => {
         <NavLink
           to="/AvailableFoods"
           className={({ isActive }) =>
-            isActive ? "text-blue-500 font-bold" : ""
+            isActive ? "text-red-500 font-bold" : ""
           }
         >
           Available Foods
@@ -34,7 +34,7 @@ const Navber = () => {
         <NavLink
           to="/AddFood"
           className={({ isActive }) =>
-            isActive ? "text-blue-500 font-bold" : ""
+            isActive ? "text-red-500 font-bold" : ""
           }
         >
           Add Food
@@ -44,7 +44,7 @@ const Navber = () => {
         <NavLink
           to="/ManageMyFoods"
           className={({ isActive }) =>
-            isActive ? "text-blue-500 font-bold" : ""
+            isActive ? "text-red-500 font-bold" : ""
           }
         >
           Manage My Foods
@@ -54,7 +54,7 @@ const Navber = () => {
         <NavLink
           to="/MyFoodRequest"
           className={({ isActive }) =>
-            isActive ? "text-blue-500 font-bold" : ""
+            isActive ? "text-red-500 font-bold" : ""
           }
         >
       My Food Request
@@ -63,7 +63,7 @@ const Navber = () => {
 
      
       
-    </>
+    </> 
   );
  const handleLogOut = () => {
     logOut()
@@ -75,8 +75,11 @@ const Navber = () => {
       });
   };
   return (
-    <div className="navbar bg-base-100 shadow-sm">
-      <div className="navbar-start">
+ 
+   <nav className="sticky top-0 z-20">
+     <div className="navbar w-full px-4 sm:px-8 md:px-12 lg:px-28 mx-auto border-b border-gray-200  bg-white/20 backdrop-blur-sm">
+    
+        <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
@@ -102,7 +105,7 @@ const Navber = () => {
             {Links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <img src={logo} alt="" />
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{Links}</ul>
@@ -155,6 +158,9 @@ const Navber = () => {
            
         </div>
     </div>
+   </nav> 
+    
+  
   );
 };
 
