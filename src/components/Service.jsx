@@ -3,8 +3,9 @@ import flash from "../assets/service.jpg";
 
 const Service = () => {
   return (
-    <div className="mt-2 md:mt-10">
-      <section className="py-16  rounded-3xl px-4 bg-red-50">
+    <div className="mt-2 md:mt-5">
+      <section className="py-16  rounded-3xl px-4 ">
+        <div className="absolute inset-0 -z-10 h-full w-full bg-red-50 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
         <div className="text-center w-11/12 mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
             Share More, Waste Less with{" "}

@@ -1,9 +1,11 @@
 import React from "react";
 
+
 const FoodSupportSection = () => {
   return (
-    <section className="bg-gray-100 text-gray-700 py-12 px-4 ">
-      <div className="w-11/12  mx-auto">
+    <section className="text-gray-700 py-12 px-4 relative">
+      <div className="absolute inset-0 -z-10 h-full w-full bg-red-50 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+      <div className="w-11/12 mx-auto">
         {/* Title & Subtitle */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -25,7 +27,10 @@ const FoodSupportSection = () => {
         {/* Info Cards */}
         <div className="grid md:grid-cols-3 gap-6">
           {/* Add & Manage Food */}
-          <div className="bg-white shadow-md p-6 rounded-md flex items-center gap-4">
+          <div
+           
+            className="bg-white shadow-md p-6 rounded-md flex items-center gap-4"
+          >
             <div className="text-green-600 text-4xl">🥗</div>
             <div>
               <p className="text-sm text-gray-600">Food Listings</p>
@@ -36,7 +41,10 @@ const FoodSupportSection = () => {
           </div>
 
           {/* Request Food */}
-          <div className="bg-white shadow-md p-6 rounded-md flex items-center gap-4">
+          <div
+            
+            className="bg-white shadow-md p-6 rounded-md flex items-center gap-4"
+          >
             <div className="text-blue-500 text-4xl">🤝</div>
             <div>
               <p className="text-sm text-gray-600">Food Requests</p>
@@ -47,7 +55,10 @@ const FoodSupportSection = () => {
           </div>
 
           {/* Support Center */}
-          <div className="bg-white shadow-md p-6 rounded-md flex items-center gap-4">
+          <div
+           
+            className="bg-white shadow-md p-6 rounded-md flex items-center gap-4"
+          >
             <div className="text-yellow-500 text-4xl">📞</div>
             <div>
               <p className="text-sm text-gray-600">Help & Support</p>
