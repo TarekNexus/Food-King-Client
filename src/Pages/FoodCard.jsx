@@ -19,6 +19,7 @@ const FoodCard = ({ food }) => {
       <p>
         Location: {food.location}
       </p>
+      <p>Expire Date: {new Date(food.expiredAt).toLocaleString()}</p>
       
       <p className="mt-1">{food.notes}</p>
       <Link to={`/foods/${food._id}`}>
