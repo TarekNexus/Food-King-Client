@@ -9,27 +9,30 @@ const ManageMyFoods = () => {
   const [editingFood, setEditingFood] = useState(null);
   const [fetching, setFetching] = useState(false);
 
-  // Fetch user foods from backend
-  const fetchFoods = () => {
-    if (!user?.email) return;
-    setFetching(true);
-    fetch(`http://localhost:4000/foodsByDonor?email=${user.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setFoods(data);
-        setFetching(false);
-      })
-      .catch(() => setFetching(false));
-  };
-
   useEffect(() => {
+    if (!user?.email) return;
+
+    const fetchFoods = async () => {
+      setFetching(true);
+      try {
+        const res = await fetch(`http://localhost:4000/foodsByDonor?email=${user.email}`);
+        if (!res.ok) throw new Error("Failed to fetch foods");
+        const data = await res.json();
+        setFoods(data);
+      } catch (error) {
+        console.error(error);
+        Swal.fire("Error", "Could not load your foods", "error");
+      } finally {
+        setFetching(false);
+      }
+    };
+
     fetchFoods();
   }, [user?.email]);
 
   if (loading) return <p className="p-4">Loading user info...</p>;
   if (!user) return <Navigate to="/login" />;
 
-  // Delete food handler with confirmation using SweetAlert2
   const handleDelete = async (id) => {
     const result = await Swal.fire({
       title: "Are you sure?",
@@ -50,17 +53,23 @@ const ManageMyFoods = () => {
 
         if (data.success) {
           Swal.fire("Deleted!", "Food deleted successfully!", "success");
-          fetchFoods();
+          // Refresh foods after deletion
+          setFetching(true);
+          const freshRes = await fetch(`http://localhost:4000/foodsByDonor?email=${user.email}`);
+          if (!freshRes.ok) throw new Error("Failed to refresh foods");
+          const freshData = await freshRes.json();
+          setFoods(freshData);
         } else {
           Swal.fire("Error!", "Failed to delete food.", "error");
         }
       } catch {
         Swal.fire("Error!", "Failed to delete food.", "error");
+      } finally {
+        setFetching(false);
       }
     }
   };
 
-  // Update form submit handler using SweetAlert2 notifications
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -83,12 +92,19 @@ const ManageMyFoods = () => {
       if (res.ok) {
         Swal.fire("Success!", "Food updated successfully!", "success");
         setEditingFood(null);
-        fetchFoods();
+        // Refresh foods after update
+        setFetching(true);
+        const freshRes = await fetch(`http://localhost:4000/foodsByDonor?email=${user.email}`);
+        if (!freshRes.ok) throw new Error("Failed to refresh foods");
+        const freshData = await freshRes.json();
+        setFoods(freshData);
       } else {
         Swal.fire("Error!", "Failed to update food.", "error");
       }
     } catch {
       Swal.fire("Error!", "Failed to update food.", "error");
+    } finally {
+      setFetching(false);
     }
   };
 
@@ -218,7 +234,7 @@ const ManageMyFoods = () => {
                 type="date"
                 id="expiredAt"
                 name="expiredAt"
-                defaultValue={new Date(editingFood.expiredAt).toISOString().split("T")[0]} // format date for input[type=date]
+                defaultValue={new Date(editingFood.expiredAt).toISOString().split("T")[0]}
                 required
                 className="w-full border border-gray-300 rounded px-4 py-2"
               />
