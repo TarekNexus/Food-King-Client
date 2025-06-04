@@ -1,14 +1,19 @@
 import React from 'react';
 import Slider from '../components/Slider';
-import Delivery from '../components/Delivery';
-import Newsletter from '../components/NewsLetter';
+
+
+import FoodSupportSection from '../components/FoodSupportSection';
+import Service from '../components/Service';
+import FeaturedFoods from '../components/featuredFoods';
+
 
 const Home = () => {
     return (
         <div>
             <Slider></Slider>
-            <Delivery></Delivery>
-            <Newsletter></Newsletter>
+            <FeaturedFoods></FeaturedFoods>
+            <Service></Service>
+            <FoodSupportSection></FoodSupportSection>
         </div>
     );
 };
