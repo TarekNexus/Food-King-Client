@@ -10,6 +10,7 @@ import AddFood from "../Pages/AddFood";
 import ManageMyFoods from "../Pages/ManageMyFoods";
 import MyFoodRequest from "../Pages/MyFoodRequest";
 import PrivetRoute from "../Provider/PrivetRoute";
+import FoodDetails from "../Pages/FoodDetails";
 
 export const router = createBrowserRouter([
   {
@@ -24,15 +25,37 @@ export const router = createBrowserRouter([
       },
       {
         path: "/AddFood",
-        element: <PrivetRoute><AddFood></AddFood></PrivetRoute>
+        element: (
+          <PrivetRoute>
+            <AddFood></AddFood>
+          </PrivetRoute>
+        ),
       },
       {
         path: "ManageMyFoods",
-        element: <PrivetRoute><ManageMyFoods></ManageMyFoods></PrivetRoute>
+        element: (
+          <PrivetRoute>
+            <ManageMyFoods></ManageMyFoods>
+          </PrivetRoute>
+        ),
       },
       {
         path: "MyFoodRequest",
-        element:<PrivetRoute> <MyFoodRequest></MyFoodRequest></PrivetRoute>
+        element: (
+          <PrivetRoute>
+            {" "}
+            <MyFoodRequest></MyFoodRequest>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/foods/:id",
+        element: (
+          <PrivetRoute>
+            {" "}
+            <FoodDetails></FoodDetails>
+          </PrivetRoute>
+        ),
       },
       {
         path: "/auth",

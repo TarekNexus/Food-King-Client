@@ -56,7 +56,7 @@ const AddFood = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-start px-4 pt-16 relative">
-        <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
+      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-red-600 mb-2">Add New Food</h2>
         <p className="text-xl">
