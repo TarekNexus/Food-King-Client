@@ -16,12 +16,16 @@ const ManageMyFoods = () => {
     const fetchFoods = async () => {
       setFetching(true);
       try {
-        const res = await fetch(`http://localhost:4000/foodsByDonor?email=${user.email}`);
+        const res = await fetch(`https://food-king-server-rho.vercel.app/foodsByDonor?email=${user.email}`, {
+          headers: {
+            authorization: `Bearer ${user.accessToken}`,
+          },
+        });
         if (!res.ok) throw new Error("Failed to fetch foods");
         const data = await res.json();
         setFoods(data);
       } catch (error) {
-        console.error(error);
+        console.error("Fetch error:", error);
         Swal.fire("Error", "Could not load your foods", "error");
       } finally {
         setFetching(false);
@@ -29,9 +33,9 @@ const ManageMyFoods = () => {
     };
 
     fetchFoods();
-  }, [user?.email]);
+  }, [user?.email, user?.accessToken]);
 
-  if (loading) return <Loading></Loading>
+  if (loading) return <Loading></Loading>;
   if (!user) return <Navigate to="/login" />;
 
   const handleDelete = async (id) => {
@@ -47,8 +51,11 @@ const ManageMyFoods = () => {
 
     if (result.isConfirmed) {
       try {
-        const res = await fetch(`http://localhost:4000/foods/${id}`, {
+        const res = await fetch(`https://food-king-server-rho.vercel.app/foods/${id}`, {
           method: "DELETE",
+          headers: {
+            authorization: `Bearer ${user.accessToken}`,
+          },
         });
         const data = await res.json();
 
@@ -56,14 +63,19 @@ const ManageMyFoods = () => {
           Swal.fire("Deleted!", "Food deleted successfully!", "success");
           // Refresh foods after deletion
           setFetching(true);
-          const freshRes = await fetch(`http://localhost:4000/foodsByDonor?email=${user.email}`);
+          const freshRes = await fetch(`https://food-king-server-rho.vercel.app/foodsByDonor?email=${user.email}`, {
+            headers: {
+              authorization: `Bearer ${user.accessToken}`,
+            },
+          });
           if (!freshRes.ok) throw new Error("Failed to refresh foods");
           const freshData = await freshRes.json();
           setFoods(freshData);
         } else {
           Swal.fire("Error!", "Failed to delete food.", "error");
         }
-      } catch {
+      } catch (error) {
+        console.error("Delete error:", error);
         Swal.fire("Error!", "Failed to delete food.", "error");
       } finally {
         setFetching(false);
@@ -84,9 +96,12 @@ const ManageMyFoods = () => {
     };
 
     try {
-      const res = await fetch(`http://localhost:4000/foods/${editingFood._id}`, {
+      const res = await fetch(`https://food-king-server-rho.vercel.app/foods/${editingFood._id}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${user.accessToken}`,
+        },
         body: JSON.stringify(updatedFood),
       });
 
@@ -95,14 +110,19 @@ const ManageMyFoods = () => {
         setEditingFood(null);
         // Refresh foods after update
         setFetching(true);
-        const freshRes = await fetch(`http://localhost:4000/foodsByDonor?email=${user.email}`);
+        const freshRes = await fetch(`https://food-king-server-rho.vercel.app/foodsByDonor?email=${user.email}`, {
+          headers: {
+            authorization: `Bearer ${user.accessToken}`,
+          },
+        });
         if (!freshRes.ok) throw new Error("Failed to refresh foods");
         const freshData = await freshRes.json();
         setFoods(freshData);
       } else {
         Swal.fire("Error!", "Failed to update food.", "error");
       }
-    } catch {
+    } catch (error) {
+      console.error("Update error:", error);
       Swal.fire("Error!", "Failed to update food.", "error");
     } finally {
       setFetching(false);

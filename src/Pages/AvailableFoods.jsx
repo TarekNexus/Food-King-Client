@@ -1,23 +1,47 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import FoodCard from "./FoodCard";
+import { AuthContext } from "../Provider/AuthContext";
+import Loading from "../components/Loading";
 
 const AvailableFoods = () => {
+  const { user } = useContext(AuthContext);
   const [foods, setFoods] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("");
-  const [isThreeCol, setIsThreeCol] = useState(true); // layout toggle state
+  const [isThreeCol, setIsThreeCol] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const params = new URLSearchParams();
-    if (searchTerm) params.append("searchTerm", searchTerm);
-    if (sortOrder) params.append("sortOrder", sortOrder);
+    const fetchFoods = async () => {
+      if (!user?.accessToken) return;
 
-    fetch(`http://localhost:4000/foods?${params.toString()}`)
-      .then((res) => res.json())
-      .then((data) => {
+      setLoading(true);
+      const params = new URLSearchParams();
+      if (searchTerm) params.append("searchTerm", searchTerm);
+      if (sortOrder) params.append("sortOrder", sortOrder);
+
+      try {
+        const res = await fetch(`https://food-king-server-rho.vercel.app/foods?${params.toString()}`, {
+          headers: {
+            authorization: `Bearer ${user.accessToken}`,
+          },
+        });
+
+        if (!res.ok) throw new Error("Failed to fetch foods");
+
+        const data = await res.json();
         setFoods(data.filter((food) => food.status === "available"));
-      });
-  }, [searchTerm, sortOrder]);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFoods();
+  }, [searchTerm, sortOrder, user?.accessToken]);
+
+  if (loading) return <Loading />;
 
   return (
     <div className="container mx-auto p-4">

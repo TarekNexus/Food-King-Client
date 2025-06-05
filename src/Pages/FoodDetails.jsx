@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
-
 import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
 import Loading from "../components/Loading";
@@ -10,51 +9,80 @@ const FoodDetails = () => {
   const [food, setFood] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [additionalNotes, setAdditionalNotes] = useState("");
+  const [isRequesting, setIsRequesting] = useState(false);
 
   const { user } = useContext(AuthContext);
+
   useEffect(() => {
-    fetch(`http://localhost:4000/foods/${id}`)
-      .then((res) => res.json())
-      .then((data) => setFood(data));
-  }, [id]);
+    if (!user?.accessToken) return;
+
+    fetch(`https://food-king-server-rho.vercel.app/foods/${id}`, {
+      headers: {
+        authorization: `Bearer ${user.accessToken}`,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch food data");
+        return res.json();
+      })
+      .then((data) => setFood(data))
+      .catch((err) => {
+        console.error(err);
+        Swal.fire("Error", "Failed to load food details", "error");
+      });
+  }, [id, user?.accessToken]);
 
   const handleRequest = async () => {
-    const requestData = {
-      foodId: food._id,
-      foodName: food.foodName,
-      foodImage: food.foodImage,
-      donorEmail: food.donorEmail,
-      donorName: food.donorName,
-      userEmail: user?.email,
-      requestDate: new Date().toISOString(),
-      pickupLocation: food.location,
-      expiredAt: food.expiredAt,
-      additionalNotes,
-    };
+    setIsRequesting(true);
+    try {
+      const requestData = {
+        foodId: food._id,
+        foodName: food.foodName,
+        foodImage: food.foodImage,
+        donorEmail: food.donorEmail,
+        donorName: food.donorName,
+        userEmail: user?.email,
+        requestDate: new Date().toISOString(),
+        pickupLocation: food.location,
+        expiredAt: food.expiredAt,
+        additionalNotes,
+      };
 
-    await fetch("http://localhost:4000/requests", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(requestData),
-    });
+      await fetch("https://food-king-server-rho.vercel.app/requests", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${user.accessToken}`,
+        },
+        body: JSON.stringify(requestData),
+      });
 
-    await fetch(`http://localhost:4000/foods/${food._id}`, {
-      method: "PATCH",
-    });
+      await fetch(`https://food-king-server-rho.vercel.app/foods/${food._id}`, {
+        method: "PATCH",
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      });
 
-    setShowModal(false);
+      setFood((prev) => ({ ...prev, status: "requested" }));
+      setShowModal(false);
 
-    Swal.fire({
-      position: "top-center",
-      icon: "success",
-      title: "Request submitted successfully.",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-    window.location.reload();
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Request submitted successfully.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      console.error(error);
+      Swal.fire("Error", "Failed to submit request", "error");
+    } finally {
+      setIsRequesting(false);
+    }
   };
 
-  if (!food) return <Loading></Loading>;
+  if (!food) return <Loading />;
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-red-50 shadow-md rounded-lg border border-red-200">
@@ -91,7 +119,7 @@ const FoodDetails = () => {
       {/* Donor Info */}
       <div className="mt-6 pt-4 border-t border-red-200 flex items-center gap-4">
         <img
-        referrerPolicy="no-referrer"
+          referrerPolicy="no-referrer"
           src={food.donorImage}
           alt={food.donorName}
           className="w-16 h-16 rounded-full object-cover border-2 border-red-300"
@@ -174,9 +202,12 @@ const FoodDetails = () => {
               </button>
               <button
                 onClick={handleRequest}
-                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                disabled={isRequesting}
+                className={`px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 ${
+                  isRequesting ? "opacity-50 cursor-not-allowed" : ""
+                }`}
               >
-                Confirm Request
+                {isRequesting ? "Requesting..." : "Confirm Request"}
               </button>
             </div>
           </div>

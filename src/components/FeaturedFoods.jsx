@@ -1,16 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router";
 import FoodCard from "../Pages/FoodCard";
+import { AuthContext } from "../Provider/AuthContext";
 
 const FeaturedFoods = () => {
   const [featuredFoods, setFeaturedFoods] = useState([]);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("http://localhost:4000/foods/featured")
-      .then((res) => res.json())
-      .then((data) => setFeaturedFoods(data))
-      .catch((error) => console.error("Error fetching featured foods:", error));
-  }, []);
+  const fetchFeaturedFoods = async () => {
+    try {
+      const res = await fetch("https://food-king-server-rho.vercel.app/foods/featured", {
+        headers: {
+          authorization: `Bearer ${user?.accessToken}`,
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error(`Error ${res.status}: ${res.statusText}`);
+      }
+
+      const data = await res.json();
+      setFeaturedFoods(data);
+    } catch (error) {
+      console.error("Error fetching featured foods:", error.message);
+      // Optional: show an alert or redirect
+    }
+  };
+
+  if (user?.accessToken) {
+    fetchFeaturedFoods();
+  }
+}, [user?.accessToken]);
 
   return (
     <section className=" py-12 ">
