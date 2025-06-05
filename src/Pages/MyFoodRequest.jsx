@@ -1,21 +1,25 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../Provider/AuthContext";
 import Loading from "../components/Loading";
 
+const fetchUserRequests = async (email) => {
+  const res = await fetch(`http://localhost:4000/requests?email=${email}`);
+  if (!res.ok) throw new Error("Failed to fetch requests");
+  return res.json();
+};
 
 const MyFoodRequest = () => {
   const { user } = useContext(AuthContext);
-  const [requests, setRequests] = useState([]);
 
-  useEffect(() => {
-    if (user?.email) {
-      fetch(`http://localhost:4000/requests?email=${user.email}`)
-        .then(res => res.json())
-        .then(data => setRequests(data));
-    }
-  }, [user?.email]);
+  const { data: requests = [], isLoading, isError } = useQuery({
+    queryKey: ["requests", user?.email],
+    queryFn: () => fetchUserRequests(user.email),
+    enabled: !!user?.email,
+  });
 
-  if (!user) return <Loading></Loading>
+  if (!user || isLoading) return <Loading />;
+  if (isError) return <p className="text-center text-red-600">Failed to load requests.</p>;
 
   return (
     <div className="max-w-6xl mx-auto p-6">
@@ -33,20 +37,16 @@ const MyFoodRequest = () => {
                 <th className="py-2 px-4 border">Pickup Location</th>
                 <th className="py-2 px-4 border">Expire Date</th>
                 <th className="py-2 px-4 border">Request Date</th>
-               
               </tr>
             </thead>
             <tbody>
               {requests.map((req) => (
                 <tr key={req._id} className="text-center hover:bg-red-50 transition">
-                  <td className="py-2 px-4 border">
-                      {req.foodName}
-                  </td>
+                  <td className="py-2 px-4 border">{req.foodName}</td>
                   <td className="py-2 px-4 border">{req.donorName}</td>
                   <td className="py-2 px-4 border">{req.pickupLocation}</td>
                   <td className="py-2 px-4 border">{new Date(req.expiredAt).toLocaleDateString()}</td>
                   <td className="py-2 px-4 border">{new Date(req.requestDate).toLocaleString()}</td>
-                  
                 </tr>
               ))}
             </tbody>
