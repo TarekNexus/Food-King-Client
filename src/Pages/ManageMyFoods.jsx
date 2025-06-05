@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Navigate } from "react-router";
 import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
+import Loading from "../components/Loading";
 
 const ManageMyFoods = () => {
   const { user, loading } = useContext(AuthContext);
@@ -30,7 +31,7 @@ const ManageMyFoods = () => {
     fetchFoods();
   }, [user?.email]);
 
-  if (loading) return <p className="p-4">Loading user info...</p>;
+  if (loading) return <Loading></Loading>
   if (!user) return <Navigate to="/login" />;
 
   const handleDelete = async (id) => {

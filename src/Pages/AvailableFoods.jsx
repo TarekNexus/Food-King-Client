@@ -5,6 +5,7 @@ const AvailableFoods = () => {
   const [foods, setFoods] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("");
+  const [isThreeCol, setIsThreeCol] = useState(true); // layout toggle state
 
   useEffect(() => {
     const params = new URLSearchParams();
@@ -14,7 +15,6 @@ const AvailableFoods = () => {
     fetch(`http://localhost:4000/foods?${params.toString()}`)
       .then((res) => res.json())
       .then((data) => {
-        // Only keep foods with status "available"
         setFoods(data.filter((food) => food.status === "available"));
       });
   }, [searchTerm, sortOrder]);
@@ -38,15 +38,26 @@ const AvailableFoods = () => {
           className="border px-3 py-2 rounded w-full md:w-1/2"
         >
           <option value="">Sort by Expiry (optional)</option>
-          <option value="asc">Expire Date Soon</option>{" "}
-          {/* earliest expiry first */}
-          <option value="desc">Expire Date Late</option>{" "}
-          {/* latest expiry first */}
+          <option value="asc">Expire Date Soon</option>
+          <option value="desc">Expire Date Late</option>
         </select>
       </div>
 
+      <div className="mb-4 text-right">
+        <button
+          onClick={() => setIsThreeCol(!isThreeCol)}
+          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+        >
+          Change Layout ({isThreeCol ? "2 Columns" : "3 Columns"})
+        </button>
+      </div>
+
       {foods.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div
+          className={`grid grid-cols-1 ${
+            isThreeCol ? "md:grid-cols-3" : "md:grid-cols-2"
+          } gap-4`}
+        >
           {foods.map((food) => (
             <FoodCard key={food._id} food={food} />
           ))}

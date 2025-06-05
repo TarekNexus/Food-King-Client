@@ -65,10 +65,11 @@ const AddFood = () => {
       </div>
 
       <div className="w-full max-w-4xl shadow-lg rounded-xl p-8 space-y-6">
-        {/* Donor Info Display */}
+       
         <div className="flex items-center gap-4 mb-6">
           {user.photoURL && (
             <img
+            referrerPolicy="no-referrer"
               src={user.photoURL}
               alt="Donor"
               className="w-16 h-16 rounded-full border"
@@ -84,7 +85,7 @@ const AddFood = () => {
           className="grid grid-cols-1 md:grid-cols-2 gap-6"
           onSubmit={handleAddFood}
         >
-          {/* Hidden donor fields */}
+         
           <input type="hidden" name="donorName" value={user.displayName} />
           <input type="hidden" name="donorEmail" value={user.email} />
           <input type="hidden" name="donorImage" value={user.photoURL} />

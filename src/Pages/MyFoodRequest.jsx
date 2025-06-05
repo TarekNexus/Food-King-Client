@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthContext";
+import Loading from "../components/Loading";
 
 
 const MyFoodRequest = () => {
@@ -14,7 +15,7 @@ const MyFoodRequest = () => {
     }
   }, [user?.email]);
 
-  if (!user) return <p className="p-4 text-center text-gray-600">Loading user info...</p>;
+  if (!user) return <Loading></Loading>
 
   return (
     <div className="max-w-6xl mx-auto p-6">

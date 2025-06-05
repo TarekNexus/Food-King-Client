@@ -142,7 +142,7 @@ const Navber = () => {
                 to="/auth/register"
                 className="px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base btn text-white border-none font-semibold bg-red-600 hover:bg-red-700 rounded-3xl shadow-md transition duration-300"
               >
-                SignUp
+                Register
               </Link>
             </>
           )}
