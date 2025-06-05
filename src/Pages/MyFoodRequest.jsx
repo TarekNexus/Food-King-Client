@@ -34,6 +34,7 @@ const MyFoodRequest = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6">
+      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
       <h2 className="text-3xl font-bold text-red-700 mb-6 text-center">
         My Food Requests
       </h2>

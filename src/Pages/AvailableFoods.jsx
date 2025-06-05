@@ -41,10 +41,9 @@ const AvailableFoods = () => {
     fetchFoods();
   }, [searchTerm, sortOrder, user?.accessToken]);
 
-  if (loading) return <Loading />;
-
   return (
     <div className="container mx-auto p-4">
+      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
       <h2 className="text-2xl font-bold mb-4">Available Foods</h2>
 
       <div className="flex flex-col md:flex-row gap-4 mb-4">
@@ -76,7 +75,11 @@ const AvailableFoods = () => {
         </button>
       </div>
 
-      {foods.length > 0 ? (
+      {loading ? (
+        <div className="flex justify-center items-center min-h-[200px]">
+          <Loading />
+        </div>
+      ) : foods.length > 0 ? (
         <div
           className={`grid grid-cols-1 ${
             isThreeCol ? "md:grid-cols-3" : "md:grid-cols-2"
