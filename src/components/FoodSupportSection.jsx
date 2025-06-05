@@ -3,7 +3,7 @@ import React from "react";
 const FoodSupportSection = () => {
   return (
     <section className="text-gray-700 py-12 px-4 relative">
-      <div className="absolute inset-0 -z-10 h-full w-full bg-red-50 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
       <div className="w-11/12 mx-auto">
         {/* Title & Subtitle */}
         <div className="text-center mb-12">

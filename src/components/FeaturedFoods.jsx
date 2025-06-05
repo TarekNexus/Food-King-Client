@@ -8,34 +8,36 @@ const FeaturedFoods = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-  const fetchFeaturedFoods = async () => {
-    try {
-      const res = await fetch("https://food-king-server-rho.vercel.app/foods/featured", {
-        headers: {
-          authorization: `Bearer ${user?.accessToken}`,
-        },
-      });
+    const fetchFeaturedFoods = async () => {
+      try {
+        const res = await fetch(
+          "https://food-king-server-rho.vercel.app/foods/featured",
+          {
+            headers: {
+              authorization: `Bearer ${user?.accessToken}`,
+            },
+          }
+        );
 
-      if (!res.ok) {
-        throw new Error(`Error ${res.status}: ${res.statusText}`);
+        if (!res.ok) {
+          throw new Error(`Error ${res.status}: ${res.statusText}`);
+        }
+
+        const data = await res.json();
+        setFeaturedFoods(data);
+      } catch (error) {
+        console.error("Error fetching featured foods:", error.message);
+        // Optional: show an alert or redirect
       }
+    };
 
-      const data = await res.json();
-      setFeaturedFoods(data);
-    } catch (error) {
-      console.error("Error fetching featured foods:", error.message);
-      // Optional: show an alert or redirect
+    if (user?.accessToken) {
+      fetchFeaturedFoods();
     }
-  };
-
-  if (user?.accessToken) {
-    fetchFeaturedFoods();
-  }
-}, [user?.accessToken]);
+  }, [user?.accessToken]);
 
   return (
-    <section className="relative py-12 ">
-  
+    <section className=" py-12 ">
       <h2 className="text-4xl text-center font-extrabold text-red-700 mb-6">
         Featured Foods
       </h2>
