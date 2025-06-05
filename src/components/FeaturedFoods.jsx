@@ -1,23 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router"; // Corrected import
 import FoodCard from "../Pages/FoodCard";
-import { AuthContext } from "../Provider/AuthContext";
 
 const FeaturedFoods = () => {
   const [featuredFoods, setFeaturedFoods] = useState([]);
-  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchFeaturedFoods = async () => {
       try {
-        const res = await fetch(
-          "https://food-king-server-rho.vercel.app/foods/featured",
-          {
-            headers: {
-              authorization: `Bearer ${user?.accessToken}`,
-            },
-          }
-        );
+        const res = await fetch("https://food-king-server-rho.vercel.app/foods/featured");
 
         if (!res.ok) {
           throw new Error(`Error ${res.status}: ${res.statusText}`);
@@ -27,17 +18,14 @@ const FeaturedFoods = () => {
         setFeaturedFoods(data);
       } catch (error) {
         console.error("Error fetching featured foods:", error.message);
-        // Optional: show an alert or redirect
       }
     };
 
-    if (user?.accessToken) {
-      fetchFeaturedFoods();
-    }
-  }, [user?.accessToken]);
+    fetchFeaturedFoods();
+  }, []);
 
   return (
-    <section className=" py-12 ">
+    <section className="py-12">
       <h2 className="text-4xl text-center font-extrabold text-red-700 mb-6">
         Featured Foods
       </h2>
@@ -52,7 +40,7 @@ const FeaturedFoods = () => {
             <FoodCard key={index} food={food} />
           ))
         ) : (
-          <p className="text-gray-500 col-span-full">
+          <p className="text-gray-500 col-span-full text-center">
             No featured foods found.
           </p>
         )}

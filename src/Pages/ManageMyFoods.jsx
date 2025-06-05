@@ -5,6 +5,9 @@ import Swal from "sweetalert2";
 import Loading from "../components/Loading";
 
 const ManageMyFoods = () => {
+   useEffect(() => {
+    document.title = "ManageMyFoods | FOOD KING";
+  }, []);
   const { user, loading } = useContext(AuthContext);
   const [foods, setFoods] = useState([]);
   const [editingFood, setEditingFood] = useState(null);

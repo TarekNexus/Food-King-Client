@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import Lottie from 'lottie-react';
 import plant404Animation from '../assets/Animation - 1749111653524.json'; // Update the path as needed
 
 const Error = () => {
   const navigate = useNavigate();
-
+ useEffect(() => {
+    document.title = "Error | FOOD KING";
+  }, []);
   return (
     <div className="min-h-screen flex flex-col items-center justify-center text-red-900 text-center px-4">
       <div className="absolute inset-0 -z-10 h-full w-full bg-red-50 bg-[radial-gradient(#fecaca_1px,transparent_1px)] [background-size:16px_16px]"></div>

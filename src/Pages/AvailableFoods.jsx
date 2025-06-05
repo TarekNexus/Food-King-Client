@@ -1,10 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FoodCard from "./FoodCard";
-import { AuthContext } from "../Provider/AuthContext";
 import Loading from "../components/Loading";
 
 const AvailableFoods = () => {
-  const { user } = useContext(AuthContext);
   const [foods, setFoods] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("");
@@ -13,19 +11,13 @@ const AvailableFoods = () => {
 
   useEffect(() => {
     const fetchFoods = async () => {
-      if (!user?.accessToken) return;
-
       setLoading(true);
       const params = new URLSearchParams();
       if (searchTerm) params.append("searchTerm", searchTerm);
       if (sortOrder) params.append("sortOrder", sortOrder);
 
       try {
-        const res = await fetch(`https://food-king-server-rho.vercel.app/foods?${params.toString()}`, {
-          headers: {
-            authorization: `Bearer ${user.accessToken}`,
-          },
-        });
+        const res = await fetch(`https://food-king-server-rho.vercel.app/foods?${params.toString()}`);
 
         if (!res.ok) throw new Error("Failed to fetch foods");
 
@@ -39,11 +31,14 @@ const AvailableFoods = () => {
     };
 
     fetchFoods();
-  }, [searchTerm, sortOrder, user?.accessToken]);
-
+  }, [searchTerm, sortOrder]);
+ useEffect(() => {
+    document.title = "Available Foods | FOOD KING";
+  }, []);
   return (
     <div className="container mx-auto p-4">
       <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
+      
       <h2 className="text-2xl font-bold mb-4">Available Foods</h2>
 
       <div className="flex flex-col md:flex-row gap-4 mb-4">
@@ -81,9 +76,7 @@ const AvailableFoods = () => {
         </div>
       ) : foods.length > 0 ? (
         <div
-          className={`grid grid-cols-1 ${
-            isThreeCol ? "md:grid-cols-3" : "md:grid-cols-2"
-          } gap-4`}
+          className={`grid grid-cols-1 ${isThreeCol ? "md:grid-cols-3" : "md:grid-cols-2"} gap-4`}
         >
           {foods.map((food) => (
             <FoodCard key={food._id} food={food} />

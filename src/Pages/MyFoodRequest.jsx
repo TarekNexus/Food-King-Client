@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../Provider/AuthContext";
 import Loading from "../components/Loading";
@@ -14,6 +14,9 @@ const fetchUserRequests = async (email, token) => {
 };
 
 const MyFoodRequest = () => {
+   useEffect(() => {
+    document.title = "MyFoodRequest | FOOD KING";
+  }, []);
   const { user } = useContext(AuthContext);
 
   const {

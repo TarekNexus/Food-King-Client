@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Slider from '../components/Slider';
 
 
@@ -8,6 +8,9 @@ import FeaturedFoods from '../components/featuredFoods';
 
 
 const Home = () => {
+     useEffect(() => {
+        document.title = "Home | FOOD KING";
+      }, []);
     return (
         <div>
             <Slider></Slider>

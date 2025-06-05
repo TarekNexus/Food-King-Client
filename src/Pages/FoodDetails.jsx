@@ -5,6 +5,9 @@ import Swal from "sweetalert2";
 import Loading from "../components/Loading";
 
 const FoodDetails = () => {
+   useEffect(() => {
+    document.title = "FoodDetails | FOOD KING";
+  }, []);
   const { id } = useParams();
   const [food, setFood] = useState(null);
   const [showModal, setShowModal] = useState(false);

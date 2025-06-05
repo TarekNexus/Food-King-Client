@@ -2,7 +2,9 @@ import { Link } from "react-router";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react"
 
+
 const FoodCard = ({ food }) => {
+  
   return (
     <motion.div
      whileHover={{ scale: 1.05 }}
