@@ -13,7 +13,6 @@ const FoodDetails = () => {
   const [showModal, setShowModal] = useState(false);
   const [additionalNotes, setAdditionalNotes] = useState("");
   const [isRequesting, setIsRequesting] = useState(false);
-
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
