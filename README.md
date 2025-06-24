@@ -1,4 +1,4 @@
-# FoodKing 🍲
+## FoodKing 🍲
 
 FoodKing is a full-stack food sharing web application that connects donors and receivers to share surplus food. It allows users to add, update, request, and manage food items with secure authentication and responsive design.
 
