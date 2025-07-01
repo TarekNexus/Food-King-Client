@@ -17,7 +17,7 @@ const AvailableFoods = () => {
       if (sortOrder) params.append("sortOrder", sortOrder);
 
       try {
-        const res = await fetch(`https://food-king-server-rho.vercel.app/foods?${params.toString()}`);
+        const res = await fetch(`http://localhost:4000/foods?${params.toString()}`);
 
         if (!res.ok) throw new Error("Failed to fetch foods");
 

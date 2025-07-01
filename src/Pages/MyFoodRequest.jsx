@@ -4,7 +4,7 @@ import { AuthContext } from "../Provider/AuthContext";
 import Loading from "../components/Loading";
 
 const fetchUserRequests = async (email, token) => {
-  const res = await fetch(`https://food-king-server-rho.vercel.app/requests?email=${email}`, {
+  const res = await fetch(`http://localhost:4000/requests?email=${email}`, {
     headers: {
       authorization: `Bearer ${token}`,
     },

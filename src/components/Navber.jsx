@@ -29,36 +29,40 @@ const Navber = () => {
           Available Foods
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/AddFood"
-          className={({ isActive }) =>
-            isActive ? "text-red-500 font-bold" : ""
-          }
-        >
-          Add Food
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/ManageMyFoods"
-          className={({ isActive }) =>
-            isActive ? "text-red-500 font-bold" : ""
-          }
-        >
-          Manage My Foods
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/MyFoodRequest"
-          className={({ isActive }) =>
-            isActive ? "text-red-500 font-bold" : ""
-          }
-        >
-          My Food Request
-        </NavLink>
-      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink
+              to="/AddFood"
+              className={({ isActive }) =>
+                isActive ? "text-red-500 font-bold" : ""
+              }
+            >
+              Add Food
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/ManageMyFoods"
+              className={({ isActive }) =>
+                isActive ? "text-red-500 font-bold" : ""
+              }
+            >
+              Manage My Foods
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/MyFoodRequest"
+              className={({ isActive }) =>
+                isActive ? "text-red-500 font-bold" : ""
+              }
+            >
+              My Food Request
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   const handleLogOut = () => {
@@ -99,7 +103,9 @@ const Navber = () => {
               {Links}
             </ul>
           </div>
-          <img className="w-30 md:w-40" src={logo} alt="" />
+          <NavLink to="/">
+            <img className="w-30 md:w-40" src={logo} alt="" />
+          </NavLink>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{Links}</ul>

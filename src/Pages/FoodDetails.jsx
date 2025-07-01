@@ -18,7 +18,7 @@ const FoodDetails = () => {
   useEffect(() => {
     if (!user?.accessToken) return;
 
-    fetch(`https://food-king-server-rho.vercel.app/foods/${id}`, {
+    fetch(`http://localhost:4000/foods/${id}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },
@@ -50,7 +50,7 @@ const FoodDetails = () => {
         additionalNotes,
       };
 
-      await fetch("https://food-king-server-rho.vercel.app/requests", {
+      await fetch("http://localhost:4000/requests", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +59,7 @@ const FoodDetails = () => {
         body: JSON.stringify(requestData),
       });
 
-      await fetch(`https://food-king-server-rho.vercel.app/foods/${food._id}`, {
+      await fetch(`http://localhost:4000/foods/${food._id}`, {
         method: "PATCH",
         headers: {
           authorization: `Bearer ${user.accessToken}`,

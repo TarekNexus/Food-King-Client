@@ -25,7 +25,7 @@ const AddFood = () => {
       status: "available",
     };
     console.log(newFood);
-    fetch("https://food-king-server-rho.vercel.app/foods", {
+    fetch("http://localhost:4000/foods", {
       method: "POST",
       headers: {
         "content-type": "application/json",
