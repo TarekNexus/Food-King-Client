@@ -5,24 +5,30 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
+import { useNavigate } from "react-router"; // ✅
+
 import slider1 from "../assets/food-3.jpg";
 import slider2 from "../assets/food-tt.jpeg";
 import slider3 from "../assets/food-1.avif";
 import slider4 from "../assets/food-4.jpg";
 
 const Slider = () => {
+  const navigate = useNavigate(); // ✅
+
   const slides = [
     {
       image: slider1,
       title: "Share Your Extra Food",
       description: "Help reduce food waste by donating what you don't need",
       cta: "Add Food",
+      path: "/AddFood", // ✅
     },
     {
       image: slider2,
       title: "Browse Available Meals",
       description: "Find shared meals and groceries near you in seconds",
       cta: "Find Food",
+      path: "/AvailableFoods", // ✅
     },
     {
       image: slider3,
@@ -30,17 +36,19 @@ const Slider = () => {
       description:
         "Send requests for available food and manage your requests easily",
       cta: "Request Food",
+      path: "/MyFoodRequest", // ✅
     },
     {
       image: slider4,
       title: "Join the Food King Community",
       description: "Together we fight hunger and food waste—one meal at a time",
       cta: "Get Started",
+      path: "/auth/register", // ✅
     },
   ];
 
   return (
-    <div className="w-full h-[70vh] max-h-[800px] ">
+    <div className="w-full h-[70vh] max-h-[800px]">
       <Swiper
         modules={[Autoplay, Pagination, Navigation]}
         spaceBetween={0}
@@ -78,7 +86,10 @@ const Slider = () => {
                 <p className="text-lg sm:text-xl md:text-2xl mb-8 text-green-100">
                   {slide.description}
                 </p>
-                <button className="px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-300">
+                <button
+                  onClick={() => navigate(slide.path)} // ✅
+                  className="px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-300"
+                >
                   {slide.cta}
                 </button>
               </div>
