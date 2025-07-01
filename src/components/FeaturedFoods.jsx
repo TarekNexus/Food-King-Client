@@ -34,7 +34,7 @@ const FeaturedFoods = () => {
         your community. Request what you need — no one should go hungry.
       </p>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 px-6 w-11/12 mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-6 w-11/12 mx-auto">
         {featuredFoods.length > 0 ? (
           featuredFoods.map((food, index) => (
             <FoodCard key={index} food={food} />
