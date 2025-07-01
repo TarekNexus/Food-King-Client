@@ -5,6 +5,7 @@ import Slider from '../components/Slider';
 import FoodSupportSection from '../components/FoodSupportSection';
 import Service from '../components/Service';
 import FeaturedFoods from '../components/featuredFoods';
+import PromotionBanner from '../components/PromotionBanner';
 
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
             <FeaturedFoods></FeaturedFoods>
             <Service></Service>
             <FoodSupportSection></FoodSupportSection>
+            <PromotionBanner></PromotionBanner>
            
         </div>
     );
