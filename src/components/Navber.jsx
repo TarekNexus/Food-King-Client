@@ -131,7 +131,7 @@ const Navber = () => {
               </div>
               <button
                 onClick={handleLogOut}
-                className="px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base text-white font-semibold border-none bg-red-600 hover:bg-green-700 rounded-3xl shadow-md transition duration-300"
+                className="px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base text-white font-semibold border-none bg-red-600 hover:bg-red-700 rounded-3xl shadow-md transition duration-300"
               >
                 LogOut
               </button>
