@@ -8,7 +8,7 @@ const FeaturedFoods = () => {
   useEffect(() => {
     const fetchFeaturedFoods = async () => {
       try {
-        const res = await fetch("http://localhost:4000/foods/featured");
+        const res = await fetch("https://food-king-server-rho.vercel.app/foods/featured");
 
         if (!res.ok) {
           throw new Error(`Error ${res.status}: ${res.statusText}`);

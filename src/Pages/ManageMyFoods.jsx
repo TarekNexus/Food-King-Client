@@ -19,7 +19,7 @@ const ManageMyFoods = () => {
     const fetchFoods = async () => {
       setFetching(true);
       try {
-        const res = await fetch(`http://localhost:4000/foodsByDonor?email=${user.email}`, {
+        const res = await fetch(`https://food-king-server-rho.vercel.app/foodsByDonor?email=${user.email}`, {
           headers: {
             authorization: `Bearer ${user.accessToken}`,
           },
@@ -54,7 +54,7 @@ const ManageMyFoods = () => {
 
     if (result.isConfirmed) {
       try {
-        const res = await fetch(`http://localhost:4000/foods/${id}`, {
+        const res = await fetch(`https://food-king-server-rho.vercel.app/foods/${id}`, {
           method: "DELETE",
           headers: {
             authorization: `Bearer ${user.accessToken}`,
@@ -66,7 +66,7 @@ const ManageMyFoods = () => {
           Swal.fire("Deleted!", "Food deleted successfully!", "success");
           // Refresh foods after deletion
           setFetching(true);
-          const freshRes = await fetch(`http://localhost:4000/foodsByDonor?email=${user.email}`, {
+          const freshRes = await fetch(`https://food-king-server-rho.vercel.app/foodsByDonor?email=${user.email}`, {
             headers: {
               authorization: `Bearer ${user.accessToken}`,
             },
@@ -99,7 +99,7 @@ const ManageMyFoods = () => {
     };
 
     try {
-      const res = await fetch(`http://localhost:4000/foods/${editingFood._id}`, {
+      const res = await fetch(`https://food-king-server-rho.vercel.app/foods/${editingFood._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -113,7 +113,7 @@ const ManageMyFoods = () => {
         setEditingFood(null);
         // Refresh foods after update
         setFetching(true);
-        const freshRes = await fetch(`http://localhost:4000/foodsByDonor?email=${user.email}`, {
+        const freshRes = await fetch(`https://food-king-server-rho.vercel.app/foodsByDonor?email=${user.email}`, {
           headers: {
             authorization: `Bearer ${user.accessToken}`,
           },
