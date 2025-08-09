@@ -64,7 +64,7 @@ const AddFood = () => {
         </p>
       </div>
 
-      <div className="w-full max-w-4xl shadow-lg rounded-xl p-8 space-y-6">
+      <div className="w-full max-w-11/12 bg-white shadow-lg rounded-xl p-8 space-y-6">
        
         <div className="flex items-center gap-4 mb-6">
           {user.photoURL && (
@@ -183,7 +183,7 @@ const AddFood = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition duration-200 disabled:opacity-50"
+              className="w-9/12 mx-auto flex justify-center bg-red-600 hover:bg-red-700 text-white font-semibold py-2 rounded-lg transition duration-200 disabled:opacity-50"
             >
               {loading ? "Adding..." : "Add Food"}
             </button>
