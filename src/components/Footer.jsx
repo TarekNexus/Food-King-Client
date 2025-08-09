@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import Swal from "sweetalert2";
 import {
   FaFacebook,
   FaTwitter,
@@ -8,7 +9,33 @@ import {
 } from "react-icons/fa";
 import logo from "../assets/logo.svg";
 import { NavLink } from "react-router";
+
 const Footer = () => {
+  const [email, setEmail] = useState("");
+
+  const handleSubscribe = () => {
+    if (!email) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please enter your email!",
+      });
+      return;
+    }
+
+    // You can add your subscription API logic here
+
+    Swal.fire({
+      icon: "success",
+      title: "Subscribed!",
+      text: `Thanks for subscribing with ${email}`,
+      timer: 2500,
+      showConfirmButton: false,
+    });
+
+    setEmail(""); // Clear input after subscribe
+  };
+
   return (
     <footer className="bg-[#f4f1ea] text-black pt-12 pb-6 px-4 sm:px-6 lg:px-8">
       <div className="max-w-11/12 mx-auto">
@@ -17,26 +44,32 @@ const Footer = () => {
           {/* Brand Info */}
           <div className="flex flex-col items-center md:items-start">
             <div className="flex items-center mb-4">
-              <img className="w-40" src={logo} alt="" />
+              <img className="w-40" src={logo} alt="FoodKing Logo" />
             </div>
             <p className="text-black text-opacity-90 text-center md:text-left mb-4">
               Savor the taste of tradition with our thoughtfully prepared dishes
             </p>
             <div className="flex space-x-4">
               <a
-                href="#"
+                href="https://www.facebook.com/Tarek5920"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-black text-opacity-80 hover:text-opacity-100 hover:scale-110 transition-transform duration-300"
               >
                 <FaFacebook className="text-xl" />
               </a>
               <a
-                href="#"
+                href="https://x.com/tarekdeveloper"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-black text-opacity-80 hover:text-opacity-100 hover:scale-110 transition-transform duration-300"
               >
                 <FaTwitter className="text-xl" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/muh.ammadtarek/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-black text-opacity-80 hover:text-opacity-100 hover:scale-110 transition-transform duration-300"
               >
                 <FaInstagram className="text-xl" />
@@ -142,16 +175,20 @@ const Footer = () => {
               Cooking Tips
             </h3>
             <p className="text-black text-opacity-90 text-center md:text-left mb-4">
-              Join our foodie family get delicious updates and members-only
-              deals!
+              Join our foodie family get delicious updates and members-only deals!
             </p>
             <div className="flex w-full">
               <input
                 type="email"
                 placeholder="Your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="px-4 py-2 rounded-l-lg bg-white bg-opacity-20 backdrop-blur-sm text-black placeholder-black placeholder-opacity-70 w-full border border-white border-opacity-50 focus:outline-none focus:border-opacity-100 focus:bg-opacity-30 transition duration-300"
               />
-              <button className="bg-red-600 hover:bg-red-700 border border-white border-opacity-50 hover:border-opacity-100 text-white font-medium px-4 py-2 rounded-r-lg transition duration-300">
+              <button
+                onClick={handleSubscribe}
+                className="bg-red-600 hover:bg-red-700 border border-white border-opacity-50 hover:border-opacity-100 text-white font-medium px-4 py-2 rounded-r-lg transition duration-300"
+              >
                 Subscribe
               </button>
             </div>
@@ -160,9 +197,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="border-t border-white border-opacity-30 pt-6 text-center text-black text-opacity-80">
-          <p>
-            &copy; {new Date().getFullYear()} FOOD KING. All rights reserved.
-          </p>
+          <p>&copy; {new Date().getFullYear()} FOOD KING. All rights reserved.</p>
         </div>
       </div>
     </footer>
