@@ -133,7 +133,7 @@ const ManageMyFoods = () => {
   };
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
+    <div className="p-6 max-w-11/12 mx-auto bg-white">
       <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
       <h2 className="text-2xl font-bold mb-6 text-center">Manage My Foods</h2>
 
