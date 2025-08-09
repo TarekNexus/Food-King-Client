@@ -25,7 +25,7 @@ To reduce food waste and help communities by enabling users to share extra food 
 - Axios  
 - React Hook Form  
 - TanStack React Query  
-- JWT Decode  
+- JWT   
 - SweetAlert2 / React Hot Toast  
 - Framer Motion  
 - dotenv  
