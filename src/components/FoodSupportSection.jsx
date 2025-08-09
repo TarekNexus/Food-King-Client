@@ -24,40 +24,47 @@ const FoodSupportSection = () => {
         </p>
 
         {/* Info Cards */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {/* Add & Manage Food */}
-          <div className="bg-white shadow-md p-6 rounded-md flex items-center gap-4">
-            <div className="text-green-600 text-4xl">🥗</div>
-            <div>
-              <p className="text-sm text-gray-600">Food Listings</p>
-              <p className="text-lg font-semibold text-gray-900">
-                Add & manage shared food
-              </p>
-            </div>
-          </div>
+        <div className="grid md:grid-cols-3 gap-8">
+  {/* Add & Manage Food */}
+  <div className="bg-white shadow-lg rounded-xl p-8 flex flex-col items-center text-center transition-transform hover:scale-105 hover:shadow-2xl cursor-pointer">
+    <div className="text-green-600 text-6xl mb-6 animate-bounce">
+      🥗
+    </div>
+    <p className="text-sm text-gray-500 uppercase tracking-wide mb-2 font-semibold">
+      Food Listings
+    </p>
+    <p className="text-xl font-bold text-gray-900">
+      Add & manage shared food
+    </p>
+  </div>
 
-          {/* Request Food */}
-          <div className="bg-white shadow-md p-6 rounded-md flex items-center gap-4">
-            <div className="text-blue-500 text-4xl">🤝</div>
-            <div>
-              <p className="text-sm text-gray-600">Food Requests</p>
-              <p className="text-lg font-semibold text-gray-900">
-                Request available meals
-              </p>
-            </div>
-          </div>
+  {/* Request Food */}
+  <div className="bg-white shadow-lg rounded-xl p-8 flex flex-col items-center text-center transition-transform hover:scale-105 hover:shadow-2xl cursor-pointer">
+    <div className="text-blue-500 text-6xl mb-6 animate-pulse">
+      🤝
+    </div>
+    <p className="text-sm text-gray-500 uppercase tracking-wide mb-2 font-semibold">
+      Food Requests
+    </p>
+    <p className="text-xl font-bold text-gray-900">
+      Request available meals
+    </p>
+  </div>
 
-          {/* Support Center */}
-          <div className="bg-white shadow-md p-6 rounded-md flex items-center gap-4">
-            <div className="text-yellow-500 text-4xl">📞</div>
-            <div>
-              <p className="text-sm text-gray-600">Help & Support</p>
-              <p className="text-lg font-semibold text-gray-900">
-                +88 01234-567890
-              </p>
-            </div>
-          </div>
-        </div>
+  {/* Support Center */}
+  <div className="bg-white shadow-lg rounded-xl p-8 flex flex-col items-center text-center transition-transform hover:scale-105 hover:shadow-2xl cursor-pointer">
+    <div className="text-yellow-500 text-6xl mb-6 animate-spin-slow">
+      📞
+    </div>
+    <p className="text-sm text-gray-500 uppercase tracking-wide mb-2 font-semibold">
+      Help & Support
+    </p>
+    <p className="text-xl font-bold text-gray-900">
+      +88 01234-567890
+    </p>
+  </div>
+</div>
+
       </div>
     </section>
   );
